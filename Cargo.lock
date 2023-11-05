@@ -168,9 +168,9 @@ dependencies = [
 
 [[package]]
 name = "doxygen-rs"
-version = "0.2.2"
+version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bff670ea0c9bbb8414e7efa6e23ebde2b8f520a7eef78273a3918cf1903e7505"
+checksum = "415b6ec780d34dcf624666747194393603d0373b7141eef01d12ee58881507d9"
 dependencies = [
  "phf",
 ]
@@ -199,8 +199,7 @@ checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
 [[package]]
 name = "heed"
 version = "0.20.0-alpha.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "73c1bf74536df78f63a1e666ba4f4ce0500a814f54be572f616a765d2a51a39a"
+source = "git+https://github.com/meilisearch/heed?branch=put-reserved-maybe-uninit#584a274f3076906538ffee4ba0080cac99acf60f"
 dependencies = [
  "bitflags",
  "bytemuck",
@@ -231,14 +230,12 @@ dependencies = [
 [[package]]
 name = "heed-traits"
 version = "0.20.0-alpha.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "34d4dc5baa42b0365969eb3853bb2cec2e032f3cf71f2a9f2503790fcae17832"
+source = "git+https://github.com/meilisearch/heed?branch=put-reserved-maybe-uninit#584a274f3076906538ffee4ba0080cac99acf60f"
 
 [[package]]
 name = "heed-types"
 version = "0.20.0-alpha.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9934170f0675423ffe6f9eb6f47fde4dc4b9334f370e2d8ca817e101e7eeeee"
+source = "git+https://github.com/meilisearch/heed?branch=put-reserved-maybe-uninit#584a274f3076906538ffee4ba0080cac99acf60f"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -273,13 +270,11 @@ checksum = "89d92a4743f9a61002fae18374ed11e7973f530cb3a3255fb354818118b2203c"
 [[package]]
 name = "lmdb-master-sys"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "629c123f5321b48fa4f8f4d3b868165b748d9ba79c7103fb58e3a94f736bcedd"
+source = "git+https://github.com/meilisearch/heed?branch=put-reserved-maybe-uninit#584a274f3076906538ffee4ba0080cac99acf60f"
 dependencies = [
  "cc",
  "doxygen-rs",
  "libc",
- "pkg-config",
 ]
 
 [[package]]
@@ -347,12 +342,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pkg-config"
-version = "0.3.27"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26072860ba924cbfa98ea39c8c19b4dd6a4a25423dbdf219c1eca91aa0cf6964"
-
-[[package]]
 name = "proc-macro2"
 version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -386,20 +375,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
 
 [[package]]
-name = "retain_mut"
-version = "0.1.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8c31b5c4033f8fdde8700e4657be2c497e7288f01515be52168c631e2e4d4086"
-
-[[package]]
 name = "roaring"
 version = "0.10.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6106b5cf8587f5834158895e9715a3c6c9716c8aefab57f1f7680917191c7873"
+source = "git+https://github.com/RoaringBitmap/roaring-rs?branch=serialize-into-slice#c69f6f1c7a4af7564289305d6652cb00df398daf"
 dependencies = [
  "bytemuck",
  "byteorder",
- "retain_mut",
 ]
 
 [[package]]

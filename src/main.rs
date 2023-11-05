@@ -1,6 +1,7 @@
 use heed::byteorder::BigEndian;
 use heed::{types::*, RwTxn};
 use roaring_bitmap_codec::RoaringBitmapCodec;
+use std::mem;
 use std::{fs, iter, time::Instant};
 
 mod roaring_bitmap_codec;
@@ -27,6 +28,8 @@ enum PutMethod {
     #[default]
     ClassicCodec,
     PutReserved,
+    PutReservedUninit,
+    PutReservedUninitIntoSlice,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -46,6 +49,10 @@ fn main() -> anyhow::Result<()> {
         match put_method {
             PutMethod::ClassicCodec => put_in_db_codec(&mut wtxn, db, x, &bitmap)?,
             PutMethod::PutReserved => put_in_db_reserved(&mut wtxn, db, x, &bitmap)?,
+            PutMethod::PutReservedUninit => put_in_db_reserved_uninit(&mut wtxn, db, x, &bitmap)?,
+            PutMethod::PutReservedUninitIntoSlice => {
+                put_in_db_reserved_uninit_into_slice(&mut wtxn, db, x, &bitmap)?
+            }
         }
     }
 
@@ -81,4 +88,28 @@ fn put_in_db_reserved(
     db.put_reserved(wtxn, &n, bitmap.serialized_size(), |space| {
         bitmap.serialize_into(space)
     })
+}
+
+#[inline(never)]
+fn put_in_db_reserved_uninit(
+    wtxn: &mut RwTxn,
+    db: Database<BEU32, RoaringBitmapCodec>,
+    n: u32,
+    bitmap: &RoaringBitmap,
+) -> heed::Result<()> {
+    let uninit = db.put_reserved_uninit(wtxn, &n, bitmap.serialized_size())?;
+    let slice: &mut [u8] = unsafe { mem::transmute(uninit) };
+    bitmap.serialize_into(slice).map_err(Into::into)
+}
+
+#[inline(never)]
+fn put_in_db_reserved_uninit_into_slice(
+    wtxn: &mut RwTxn,
+    db: Database<BEU32, RoaringBitmapCodec>,
+    n: u32,
+    bitmap: &RoaringBitmap,
+) -> heed::Result<()> {
+    let uninit = db.put_reserved_uninit(wtxn, &n, bitmap.serialized_size())?;
+    let slice: &mut [u8] = unsafe { mem::transmute(uninit) };
+    bitmap.serialize_into_slice(slice).map_err(Into::into)
 }
