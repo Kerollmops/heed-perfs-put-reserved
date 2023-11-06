@@ -11,7 +11,7 @@ The Meilisearch indexation process does many `get`s and `put`s into LMDB databas
 
 So, I was thinking about avoiding those possible multiple allocations of `Vec`s and `memcpy` calls from the source to the LMDB page and directly serializing the RoaringBitmap into the LMDB page allocation. I tried to do so in this code example, and I am astonished about the results: they are worse!
 
-Can you help me understand why? I tried debugging the assembly, but I am not the best. It seems related to the available size assumptions that the code is no longer able to validate.
+Can you help me understand why? I tried debugging the assembly, but I am not the best. It seems related to the available size assumptions that the code is no longer able to validate. I linked the flamegraphs in the _flamegraphs_ folder.
 
 ![Profile screenshot of the codec vs the put-reserved-uninit-into-slice versions](assets/profiler-screenshot.png)
 
