@@ -3,7 +3,8 @@ name = "heed-perfs-put-reserved"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+debug = true
 
 [dependencies]
 anyhow = "1.0.75"
@@ -14,3 +15,4 @@ heed = { git = "https://github.com/meilisearch/heed", branch = "put-reserved-may
 # roaring = "0.10.2"
 roaring = { git = "https://github.com/RoaringBitmap/roaring-rs", branch = "serialize-into-slice" }
 serde_json = "1.0.108"
+uuid = { version = "1.5.0", features = ["v5", "v4"] }

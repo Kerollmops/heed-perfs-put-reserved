@@ -36,10 +36,12 @@ fn main() -> anyhow::Result<()> {
     let Args { put_method } = Args::parse();
     let bitmap = generate_bitmap();
 
-    fs::create_dir_all("data.mdb")?;
+    let database_name = uuid::Uuid::new_v4().to_string();
+    let database_path = format!("{database_name}.mdb");
+    fs::create_dir_all(&database_path)?;
     let env = EnvOpenOptions::new()
         .map_size(TEN_GIBIBYTES)
-        .open("data.mdb")?;
+        .open(database_path)?;
 
     let mut wtxn = env.write_txn()?;
     let db: Database<BEU32, RoaringBitmapCodec> = env.create_database(&mut wtxn, None)?;
