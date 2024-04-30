@@ -1,5 +1,5 @@
 # heed-perfs-put-reserved
-A small experiment with LMDB's MDB_RESERVE flag and Roaring Bitmaps
+A small experiment with LMDB's `MDB_RESERVE` flag and Roaring Bitmaps. This problem [has been posted on the Rust SubReddit](https://old.reddit.com/r/rust/comments/17p1twn/lmdb_keyvalue_store_behavior_writing_into_a_slice/), and some interesting comments have been made.
 
 ## What is this for?
 
