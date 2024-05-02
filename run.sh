@@ -1,9 +1,14 @@
-#! /bin/bash
-set -ve
+#!/usr/bin/env bash
 
-cargo build --release
+(set -x; cargo build --release)
 
-./target/release/heed-perfs-put-reserved classic-codec
-./target/release/heed-perfs-put-reserved put-reserved
-./target/release/heed-perfs-put-reserved put-reserved-uninit
-./target/release/heed-perfs-put-reserved put-reserved-uninit-into-slice
+exe="./target/release/heed-perfs-put-reserved"
+
+for codec in classic-codec put-reserved put-reserved-alloc put-reserved-uninit put-reserved-uninit-fill-zeroes put-reserved-uninit-into-slice; do
+    # (set -x; flamegraph --root -o "flamegraphs/$codec-flamegraph.svg" -- $exe $codec)
+    # (set -x; sudo perf stat -- $exe $codec)
+    (set -x; $exe $codec)
+done
+
+rm -r *.mdb
+
